@@ -1,0 +1,38 @@
+
+Backend_DB_Automation_IMAX
+docker build -t insightsmax-backend
+aws ecr get-login-password --region us-east-1
+docker login --username AWS --password-stdin 616715461721.dkr.ecr.us-east-1.amazonaws.com
++docker tag insightsmax-backend: latest 616715461721.dkr.ecr.us-east-1.amazonaws.com/insightsmax: backend_23 +docker tag insightsmax-backend: latest 616715461721.dkr.ecr.us-east-1.amazonaws.com/insightsmax: backend_latest
++docker push 616715461721.dkr.ecr.us-east-1.amazonaws.com/insightsmax:backend_23
++ docker push 616715461721.dkr.ecr.us-east-1.amazonaws.com/insightsmax: backend_latest
++ docker rmi 616715461721.dkr.ecr.us-east-1.amazonaws.com/insightsmax: backend_23 616715461721.dkr.ecr.us-east-1.amazonaws.com/insight smax: backend_latest +aws $3 cp s3://elasticbeanstalk-us-east-1-616715461721/InsightsMAX-Env.zip.
++mkdir -p temp
++ unzip -u ./InsightsMAx-Env.zip -d temp
++mkdir -p ./temp/insightsmax-backend 
++mkdir -p ./temp/insightsmax-umbackend
++mkdir -p ./temp/insightsmax-provisioning
++echo export SECRET_ID=imax_devops
++cp./temp/insightsmax-backend/export_env_variables.sh ./temp/insightsmax-umbackend/export_env_variables.sh 
++cp./temp/insightsmax-backend/export_env_variables.sh ./temp/insightsmax-provisioning/export_env_variables.sh
+chmod -R 777 ./temp/
++sed -ie s#cinsightsmax_backend_image_path>#616715461721.dkr.ecr.us-east-1.amazonaws.com/insightsmax: backend_23#g ./temp/docker-compose.yaml 
++sed -ie s#cinsightsmax_swagger_image_path>#616715461721.dkr.ecr.us-east-1.amazonaws.com/insightsmax: swaggerdoc_latest#g ./temp/docker-compose.yaml 
++sed -ie s#cinsightsmax_provisioning_image_path>#616715461721.dkr.ecr.us-east-1.amazonaws.com/insightsmax: provisioning latest#g ./temp/docker-compose.yaml 
++ sed -ie s#cinsightsmax_umbackend_image_path>#616715461721.dkr.ecr.us-east-1.amazonaws.com/insightsmax: umbackend_latest#g ./temp/docker-compose.yaml 
++sed -ie s#cinsightsmax_um_frontend_image_path>#616715461721.dkr.ecr.us-east-1.amazonaws.com/insightsmax:um-frontend_latest#g ./temp/docker-compose.yaml
++cat./temp/docker-compose.yaml
+rm -rf InsightsMAX-Env.zip
++1s-lart temp
++cd temp
++zip -r../InsightsMAX-Env.zip.
++aws s3 cp ./InsightsMAx-Env.zip s3://elasticbeanstalk-us-east-1-616715461721/jenkins-Insightsmax-Backend -23.zip
+2022-10-31 12:59:21 Scheduling project: Backend_DB_Automation_IMAX
+
+2822-10-31 12:59:21 Scheduling project: Backend_DB_Automation_IMAX 2022-10-31 12:59:31 
+Starting building: Backend_DB_Automation_IMAX #12
++aws elasticbeanstalk create-application-version--region us-east-1-application-name InsightsMAX --version-label jenkins-Insightsmax-Backend-23 --source-bundle $3Bucket-elasticbeanstalk-us-east-1-616715461721, S3Key=jenkins-Insightsmax-Backend-23.zip 
++aws elasticbeanstalk update-environment --region us-east-1 --application-name InsightsMAX --environment-name InsightsMAX-Env --version-label jenkins-Insightsmax-Backend-23 
++aws elasticbeanstalk describe-environment-health region us-east-1-environment-name InsightsMAX-Env-attribute-names All
+
+
